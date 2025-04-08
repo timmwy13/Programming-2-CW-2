@@ -1,0 +1,31 @@
+// The manageProducts button links to a method to open a new JFrame.
+manageProducts.addActionListener(e -> openManageProductsFrame());
+// Copy+Paste for future buttons ^^
+manageSales.addActionListener(e -> openManageSalesFrame());
+manageStock.addActionListener(e -> openManageStockFrame());
+
+
+
+private void openManageProductsFrame() {
+    JFrame addFrame = new JFrame ("Manage Products");
+    addFrame.setSize(400, 400);
+    addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Label, Buttons or Any functionality should be added below here.
+}
+
+private void openManageSalesFrame() {
+    JFrame addFrame = new JFrame ("Manage Sales");
+    addFrame.setSize(400, 400);
+    addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Label, Buttons or Any functionality should be added below here.
+}
+
+private void openManageStockFrame() {
+    JFrame addFrame = new JFrame ("Manage Sales");
+    addFrame.setSize(400, 400);
+    addFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Label, Buttons or Any functionality should be added below here.
+}
