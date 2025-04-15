@@ -38,7 +38,7 @@ public class Main {
     	
     	JFrame MainMenu = new JFrame("Shop Management System");
 	    
-		MainMenu.setLayout(new FlowLayout());
+	MainMenu.setLayout(new FlowLayout());
 	    
 	    //View Products
 	    
@@ -58,7 +58,7 @@ public class Main {
                     public void actionPerformed(ActionEvent e) {
                     	
                     }
-        	    });
+        	});
             	
             	
             	//Update Product//
@@ -68,7 +68,7 @@ public class Main {
                     public void actionPerformed(ActionEvent e) {
                     	
                     }
-        	    });
+        	});
             	
             	
             	//Delete Product//
@@ -78,7 +78,7 @@ public class Main {
                     public void actionPerformed(ActionEvent e) {
                     	
                     }
-        	    });
+        	});
             	
             	
             	ViewProducts.add(addProductsButton);
@@ -94,13 +94,13 @@ public class Main {
 	    
 	    //Sales Button//
 	    
-	    JButton salesButton = new JButton("Add Transaction");
-	    salesButton.addActionListener(new ActionListener() {
+	JButton salesButton = new JButton("Add Transaction");
+	salesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             	
             }
-	    });
+	});
 	    
 	    
 	    //Summary Button//
@@ -111,15 +111,15 @@ public class Main {
             public void actionPerformed(ActionEvent e) {
             	
             }
-	    });
+	});
     	
     	
-    	MainMenu.add(salesButton);
+	MainMenu.add(viewProductsButton);
+	MainMenu.add(salesButton);
     	MainMenu.add(summaryButton);
-	    MainMenu.add(viewProductsButton);
-	    MainMenu.setSize(700, 700);
-	    MainMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    MainMenu.setVisible(true); // Show the window
+	MainMenu.setSize(700, 700);
+	MainMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	MainMenu.setVisible(true); // Show the window
     	
-		}
+	}
 }
