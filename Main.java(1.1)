@@ -1,0 +1,161 @@
+package system;
+
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.*;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+
+    // Store Products
+    private static List<Product> products = new ArrayList<>();
+
+    // Main method and GUI
+    public static void main(String[] args) {
+
+        JFrame mainMenu = new JFrame("Shop Management System");
+        mainMenu.setLayout(new FlowLayout());
+
+        // View Products Button
+        JButton viewProductsButton = new JButton("View Products");
+        viewProductsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame viewProducts = new JFrame("View Products");
+                viewProducts.setLayout(new FlowLayout());
+
+                // Add Product Button
+                JButton addProductsButton = new JButton("Add Products");
+                addProductsButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ev) {
+                        JFrame addProducts = new JFrame("Add Products");
+                        addProducts.setLayout(new FlowLayout());
+
+                        JPanel inputPanel = new JPanel();
+                        JLabel label = new JLabel("Add Product: ");
+                        JTextField productField = new JTextField(20);
+                        JButton submitButton = new JButton("Submit");
+
+                        inputPanel.add(label);
+                        inputPanel.add(productField);
+                        inputPanel.add(submitButton);
+                        addProducts.add(inputPanel);
+                        addProducts.setSize(600, 600);
+                        addProducts.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                        addProducts.setVisible(true);
+
+                        submitButton.addActionListener(submitEvent -> {
+                            String productText = productField.getText().trim();
+                            if (!productText.isEmpty()) {
+                                products.add(new Product(productText));
+                                JOptionPane.showMessageDialog(addProducts, "Product added successfully!");
+                                productField.setText("");
+                            } else {
+                                JOptionPane.showMessageDialog(addProducts, "Error: Product name cannot be empty.");
+                            }
+                        });
+                    }
+                });
+
+                // Update Product Button
+                JButton updateProductsButton = new JButton("Update Existing Products");
+                updateProductsButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ev) {
+                        // TODO: Implement update product functionality
+                    }
+                });
+
+                // Delete Product Button
+                JButton deleteProductsButton = new JButton("Remove Products");
+                deleteProductsButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ev) {
+                        // TODO: Implement delete product functionality
+                    }
+                });
+
+                viewProducts.add(addProductsButton);
+                viewProducts.add(updateProductsButton);
+                viewProducts.add(deleteProductsButton);
+
+                viewProducts.setSize(600, 600);
+                viewProducts.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                viewProducts.setVisible(true);
+            }
+        });
+
+        // Sales Button
+        JButton salesButton = new JButton("Add Transaction");
+        salesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO: Implement transaction functionality
+            }
+        });
+
+        // Summary Button
+        JButton summaryButton = new JButton("Generate Sales Summary Report");
+        summaryButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO: Implement summary report functionality
+            }
+        });
+
+        mainMenu.add(viewProductsButton);
+        mainMenu.add(salesButton);
+        mainMenu.add(summaryButton);
+        mainMenu.setSize(700, 700);
+        mainMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainMenu.setVisible(true);
+    }
+
+    // Product class
+    public static class Product {
+        private String name;
+
+        public Product(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
+}
