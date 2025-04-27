@@ -95,7 +95,7 @@ public class Main {
                         inputPanel.add(productField);
                         inputPanel.add(submitButton);
                         addProducts.add(inputPanel);
-                        addProducts.setSize(600, 600);
+                        addProducts.setSize(600, 300);
                         addProducts.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                         addProducts.setVisible(true);
 
@@ -160,7 +160,7 @@ public class Main {
 
                 // Delete Product Button
              // Delete Product Button
-                JButton deleteProductsButton = new JButton("Remove Products");
+               JButton deleteProductsButton = new JButton("Remove Products");
                 deleteProductsButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent ev) {
@@ -200,7 +200,7 @@ public class Main {
                 viewProducts.add(updateProductsButton);
                 viewProducts.add(deleteProductsButton);
 
-                viewProducts.setSize(600, 600);
+                viewProducts.setSize(600, 400);
                 viewProducts.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 viewProducts.setVisible(true);
             }
@@ -217,43 +217,49 @@ public class Main {
                 JLabel productLabel = new JLabel("Add Product Name: ");
                 JTextField productField = new JTextField(20);
                 JLabel priceLabel = new JLabel("Add Product Price: ");
-                JTextField priceField = new JTextField(20);
+                JTextField priceField = new JTextField(10);
                 JLabel quantityLabel = new JLabel("Add Sale Quantity: ");
-                JTextField quantityField = new JTextField(20);
+                JTextField quantityField = new JTextField(10);
                 JButton submitButton = new JButton("Submit");
 
                 submitButton.addActionListener(submitEvent -> {
-                    String productName = productField.getText().trim();            
-                    String price = priceField.getText().trim();            
-                    String quantity = quantityField.getText().trim();
+                String productName = productField.getText().trim();            
+                String price = priceField.getText().trim();            
+                String quantity = quantityField.getText().trim();
 
-                    if (productName == null ||productName.trim().isEmpty()) {
-                        JOptionPane.showMessageDialog(addTransaction, "Product name cannot be empty", "Error",JOptionPane.WARNING_MESSAGE);
-                        return;
-                    }
-                    if (price == null ||price.trim().isEmpty()) {
-                        JOptionPane.showMessageDialog(addTransaction, "Product Price cannot be empty", "Error",JOptionPane.WARNING_MESSAGE);
-                        return;
-                    }
-                    if (quantity == null ||quantity.trim().isEmpty()) {
-                        JOptionPane.showMessageDialog(addTransaction, "Product Quantity cannot be empty", "Error",JOptionPane.WARNING_MESSAGE);
-                        return;
-                    }
-                    else{
-                        try (BufferedWriter writer = new BufferedWriter(new FileWriter(salesFile, true))) {
-                            writer.write(productName+ ", "+price+ ", "+quantity);
-                            writer.newLine();
-                            writer.flush();
-                            // Clear inputs after saving
-                            productField.setText("");
-                            priceField.setText("");
-                            quantityField.setText("");
-                            JOptionPane.showMessageDialog(addTransaction, "Sale added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                        } 
-                        catch (IOException ex) {
-                            JOptionPane.showMessageDialog(addTransaction, "Error saving sale data!", "Error", JOptionPane.ERROR_MESSAGE);
-                        }
-                    }
+                if (productName == null ||productName.trim().isEmpty()) {
+                   JOptionPane.showMessageDialog(addTransaction, "Product name cannot be empty", "Error",JOptionPane.WARNING_MESSAGE);
+                   return;
+                }
+                
+                if (price == null ||price.trim().isEmpty()) {
+                   JOptionPane.showMessageDialog(addTransaction, "Product Price cannot be empty", "Error",JOptionPane.WARNING_MESSAGE);
+                   return;
+                }
+
+                if (quantity == null ||quantity.trim().isEmpty()) {       
+                JOptionPane.showMessageDialog(addTransaction, "Product Quantity cannot be empty", "Error",JOptionPane.WARNING_MESSAGE);
+                return;
+                }
+                    
+                else {
+                    	
+                	try (BufferedWriter writer = new BufferedWriter(new FileWriter(salesFile, true))) {
+                    writer.write(productName+ ", "+price+ ", "+quantity);        
+                    writer.newLine();       
+                    writer.flush();
+                    
+                    // Clear inputs after saving    
+                    productField.setText("");       
+                    priceField.setText("");      
+                    quantityField.setText("");       
+                    JOptionPane.showMessageDialog(addTransaction, "Sale added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);  
+                	}
+                    	   
+                	catch (IOException ex) {    
+                		JOptionPane.showMessageDialog(addTransaction, "Error saving sale data!", "Error", JOptionPane.ERROR_MESSAGE);   
+                	}
+                }
                 });
                 
                 
@@ -279,6 +285,7 @@ public class Main {
                 salesReport.setLayout(new FlowLayout());
                 double totalRevenue = 0.0;
                 StringBuilder sales = new StringBuilder();
+                
                 try (BufferedReader reader = new BufferedReader(new FileReader(salesFile))) {
                     String line;
                     while ((line = reader.readLine()) != null) {
@@ -288,10 +295,13 @@ public class Main {
                             int quantity = Integer.parseInt(saleData[2].trim());
                             totalRevenue += price * quantity;
                         }
+                        
                         String sale = "Product Name:"+saleData[0]+" | "+"Price:"+saleData[1]+" | "+"Sale Quantity:"+saleData[2]+" | "+"Total Revenue:"+totalRevenue;
                         sales.append(sale).append("\n");
+                    
                     }
                 } 
+                
                 catch (IOException ex) {
                     ex.printStackTrace();
                     JOptionPane.showMessageDialog(salesReport, "Error generating sales report!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -303,7 +313,7 @@ public class Main {
                 else {
                     JOptionPane.showMessageDialog(salesReport, sales.toString(), "Sales Report", JOptionPane.INFORMATION_MESSAGE);
                 }
-                salesReport.setSize(600, 600);
+                salesReport.setSize(600, 500);
                 salesReport.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 salesReport.setVisible(true);
             }
@@ -312,12 +322,12 @@ public class Main {
         mainMenu.add(viewProductsButton);
         mainMenu.add(salesButton);
         mainMenu.add(summaryButton);
-        mainMenu.setSize(700, 700);
+        mainMenu.setSize(600, 300);
         mainMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainMenu.setVisible(true);
     }
 
- // Product class
+ /* Product class
     public static class Product {
         private String name;
         private int quantity;
@@ -342,5 +352,5 @@ public class Main {
         public void setQuantity(int quantity) {
             this.quantity = quantity;
         }
-    }
+    }*/
 }
