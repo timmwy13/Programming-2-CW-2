@@ -173,7 +173,6 @@ public class Main {
                         JComboBox<String> productComboBox = new JComboBox<>();
                         JButton deleteButton = new JButton("Delete");
 
-                        // Add product names to combo box
                         for (Product product : products) {
                             productComboBox.addItem(product.getName());
                         }
